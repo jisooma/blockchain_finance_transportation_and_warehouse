@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.AppointContractMapper">
+        <select id="queryAppointContractByID" resultType="AppointContract">
+            select * from appointcontract
+            where id = #{id};
+        </select>
+    <select id="queryAllAppointContract" resultType="AppointContract">
+            select * from AppointContract;
+        </select>
+        <select id="queryAppointContractByLogistics" resultType="AppointContract">
+            select * from AppointContract
+            where logistics = #{logistics};
+        </select>
+    <select id="queryAppointContractByLogisticsAndStatus" resultType="AppointContract">
+            select * from AppointContract
+            where logistics = #{logistics} and status = #{status};
+        </select>
+    <select id="queryAppointContractByBankAndStatus" resultType="AppointContract">
+            select * from AppointContract
+            where  bank = #{bank} and status = #{status};
+    </select>
+
+    <select id="queryAppointContractByLogisticsAndBank" resultType="AppointContract">
+            select * from AppointContract
+            where logistics = #{logistics} and  bank = #{bank};
+    </select>
+    <select id="queryAppointContractByLogisticsAndBankAndTime" resultType="AppointContract">
+            select * from AppointContract
+            where logistics = #{logistics} and  bank = #{bank} and  updateTime = #{time};
+        </select>
+    <select id="queryAppointContractByBank" resultType="AppointContract">
+            select * from AppointContract
+            where bank = #{bank};
+        </select>
+    <insert id="addAppointContract" parameterType="AppointContract" >
+        insert into appointcontract(logistics, bank, status, money,updateTime,endTime)
+        values (#{logistics},#{bank},#{status},#{money},#{updateTime},#{endTime})
+    </insert>
+    <insert id="addAppointContract1" parameterType="AppointContract" >
+        insert into AppointContract(ID,logistics, bank, status, updateTime)
+        values (#{id},#{logistics},#{bank},#{status},#{updateTime})
+    </insert>
+
+        <update id="updateAppointContract" parameterType="AppointContract">
+            update AppointContract
+            set logistics=#{logistics},bank=#{bank},status=#{status},updateTime=#{updateTime}
+            where id=#{id};
+        </update>
+
+        <delete id="deleteAppointContract" parameterType="int">
+            delete from AppointContract where id=#{id}
+        </delete>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.ValueReportMapper">
+    <select id="queryAllValueReport" resultType="ValueReport">
+            select * from valuereport;
+        </select>
+    <select id="queryValueReportByReno" resultType="ValueReport">
+            select * from valuereport
+            where reNo= #{reno};
+    </select>
+    <select id="queryValueReportByLogistics" resultType="ValueReport">
+            select * from valuereport
+            where logistics= #{logistics};
+    </select>
+    <select id="queryAllValueReportByEnterPrise" resultType="ValueReport">
+            select * from valuereport
+            where enterprise= #{enterprise};
+    </select>
+    <insert id="addValueReport" parameterType="ValueReport" >
+        insert into valuereport (logistics, enterprise, reNo, valMoney, status, updateTime)
+        values (#{logistics}, #{enterprise}, #{reNo},#{valMoney}, #{status},#{updateTime})
+    </insert>
+    <delete id="deleteValueReport" parameterType="int">
+            delete from valuereport
+            where ID=#{id}
+        </delete>
+</mapper>

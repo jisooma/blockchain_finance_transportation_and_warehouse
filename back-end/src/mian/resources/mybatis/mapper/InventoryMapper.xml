@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.InventoryMapper">
+    <select id="queryInventoryByEnterprise" resultType="Inventory">
+            select * from `inventory`
+            where enterprise = #{enterprise};
+    </select>
+    <select id="queryInventoryByLogistics" resultType="Inventory">
+            select * from `inventory`
+            where logistics= #{logistics};
+    </select>
+    <select id="queryInventoryByLogisticsAndEnterprise" resultType="Inventory">
+            select * from `inventory`
+            where logistics= #{logistics} and enterprise = #{enterprise};
+    </select>
+    <select id="queryInventoryByID" resultType="Inventory">
+            select * from `inventory`
+            where ID= #{id};
+    </select>
+    <select id="queryInventoryByEnterpriseAndStatus" resultType="Inventory">
+            select * from `inventory`
+            where status=#{status} and enterprise = #{enterprise};
+    </select>
+    <select id="queryInventoryByLogisticsAndStatus" resultType="Inventory">
+            select * from `inventory`
+            where logistics= #{logistics} and status=#{status};
+    </select>
+    <select id="queryInventoryByStatus" resultType="Inventory">
+            select * from `inventory`
+            where status=#{status};
+    </select>
+     <select id="queryInventoryByLogisticsAndEnterpriseAndTime" resultType="Inventory">
+            select * from `inventory`
+            where logistics=#{logistics} and enterprise=#{enterprise} and updateTime=#{ts};
+    </select>
+
+    <select id="queryInventoryByLogisticsAndEnterpriseAndStatus" resultType="Inventory">
+            select * from `inventory`
+            where logistics=#{logistics} and enterprise=#{enterprise} and status=#{status};
+    </select>
+
+    <insert id="addInventory" parameterType="Inventory">
+        insert into `inventory`(enterprise, logistics, waNo,reMoney, status, updateTime,endTime)
+        values (#{enterprise}, #{logistics}, #{waNo},#{reMoney},#{status}, #{updateTime},#{endTime})
+    </insert>
+
+    <update id="updateInventory" parameterType="Inventory">
+            update `inventory`
+            set  enterprise=#{enterprise},logistics=#{logistics},waNo=#{waNo},reMoney=#{reMoney},status=#{status},updatetime= #{updateTime}
+            where ID=#{id};
+        </update>
+
+    <delete id="deleteInventory" parameterType="int">
+            delete from `inventory`
+            where ID=#{id}
+    </delete>
+</mapper>

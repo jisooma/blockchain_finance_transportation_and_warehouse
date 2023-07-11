@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.UserMapper">
+<!--    <select id="queryById" resultType="User">-->
+<!--        select * from accounttest where  ID =#{id};-->
+<!--    </select>-->
+<!--    <select id="login" resultType="User">-->
+<!--        select * from accounttest where name=#{name} and pwd =#{password} and type = #{type};-->
+<!--    </select>-->
+    <insert id="addUser" parameterType="User" >
+        insert into accounttest(type,name,password) values (#{type},#{name},#{pwd})
+    </insert>
+<!--    <update id="updateUser" parameterType="User">-->
+<!--        update accounttest set name=#{name},pwd=#{pwd}where ID=#{id};-->
+<!--    </update>-->
+<!--    <delete id="deleteUser" parameterType="int">-->
+<!--        delete from accounttest where ID=#{id}-->
+<!--    </delete>-->
+</mapper>

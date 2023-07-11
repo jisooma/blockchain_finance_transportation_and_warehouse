@@ -1,0 +1,46 @@
+encrypt-type: # 0:standard, 1:guomi
+  encrypt-type: 0
+
+group-channel-connections-config:
+  caCert: classpath:ca.crt
+  sslCert: classpath:sdk.crt
+  sslKey: classpath:sdk.key
+  all-channel-connections:
+    - group-id: 1 #group ID
+      connections-str:
+        - 123.57.52.100:20200 # node listen_ip:channel_listen_port
+        - 123.57.52.100:20201
+#        - 123.57.52.100:20202 # node listen_ip:channel_listen_port
+#        - 123.57.52.100:20203
+#        - 123.57.52.100:20204
+#        - 123.57.52.100:20205
+
+channel-service:
+  group-id: 1 # The specified group to which the SDK connects
+  agency-name: agency # agency name
+
+accounts:
+  pem-file: 0xcdcce60801c0a2e6bb534322c32ae528b9dec8d2.pem
+  p12-file: 0x98333491efac02f8ce109b0c499074d47e7779a6.p12
+  password: 123456
+
+spring:
+  servlet:
+    multipart:
+      enabled: true # 开启文件上传
+      file-size-threshold: 2KB # 文件写入磁盘的阈值
+      max-file-size: 100MB
+      max-request-size: 215MB # 最大请求值大小
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialec
+
+# 自定义文件保存路径
+mzx:
+  file:
+    root:
+      path: F:\mazhixiu\upload
+
+

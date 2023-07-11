@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.CollateralMapper">
+    <select id="queryAllCollateral" resultType="Collateral">
+            select * from collateral;
+        </select>
+    <select id="queryCollateralByConsigner" resultType="Collateral">
+            select * from collateral
+            where consigner= #{consigner};
+    </select>
+    <select id="queryCollateralByEnterprise" resultType="Collateral">
+            select * from collateral
+            where enterprise= #{enterprise};
+    </select>
+
+    <select id="queryCollateralByEnterpriseAndConsigner" resultType="Collateral">
+            select * from collateral
+            where enterprise= #{enterprise} and consigner= #{consigner};
+    </select>
+
+    <select id="queryCollateralByConsignerAndStatus" resultType="Collateral">
+            select * from collateral
+            where status= #{status} and consigner= #{consigner};
+    </select>
+
+    <select id="queryCollateralByEnterpriseAndStatus" resultType="Collateral">
+            select * from collateral
+            where enterprise= #{enterprise} and  status= #{status} ;
+    </select>
+
+    <select id="queryCollateralByStatus" resultType="Collateral">
+            select * from collateral
+            where status= #{status};
+    </select>
+
+    <select id="queryCollateralByEnterpriseAndConsignerAndTime" resultType="Collateral">
+            select * from collateral
+            where enterprise= #{enterprise} and consigner= #{consigner} and updateTime=#{time};
+    </select>
+
+    <select id="queryCollateralByID" resultType="Collateral">
+            select * from collateral
+            where ID= #{id};
+    </select>
+    <insert id="addCollateral" parameterType="Collateral" >
+        insert into collateral (enterprise, consigner, status, updatetime, endtime)
+        values (#{enterprise}, #{consigner}, #{status}, #{updateTime},#{endTime})
+    </insert>
+
+    <update id="updateCollateral" parameterType="Collateral">
+            update collateral
+            set  enterprise=#{enterprise}, consigner=#{consigner}, status= #{status}, updatetime= #{updateTime}, endtime=#{endTime}
+            where ID=#{id};
+        </update>
+
+    <delete id="deleteCollateral" parameterType="int">
+            delete from collateral where ID=#{id}
+    </delete>
+</mapper>

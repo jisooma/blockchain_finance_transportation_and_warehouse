@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.LoanContractMapper">
+
+    <select id="queryAllLoanContract" resultType="LoanContract">
+            select * from LoanContract;
+    </select>
+
+    <select id="queryLoanContractByEnterprise" resultType="LoanContract">
+            select * from LoanContract
+            where enterprise = #{enterprise};
+    </select>
+
+    <select id="queryLoanContractByBank" resultType="LoanContract">
+            select * from LoanContract
+            where bank= #{bank};
+    </select>
+    <select id="queryLoanContractByID" resultType="LoanContract">
+            select * from LoanContract
+            where id= #{id};
+    </select>
+
+    <select id="queryLoanContractByReciptID" resultType="LoanContract">
+            select * from LoanContract
+            where reciptId= #{id};
+    </select>
+    <select id="queryLoanContractByStatus" resultType="LoanContract">
+            select * from LoanContract
+            where status= #{status};
+    </select>
+
+    <select id="queryLoanContractByBankAndEnterpriseAndTime" resultType="LoanContract">
+            select * from LoanContract
+            where enterprise = #{enterprise} and bank= #{bank} and startTime=#{startTime};
+    </select>
+
+    <select id="queryLoanContractByBankAndStatus" resultType="LoanContract">
+            select * from LoanContract
+            where bank= #{bank} and status= #{status};
+    </select>
+
+    <select id="queryLoanContractByEnterpriseAndStatus" resultType="LoanContract">
+            select * from LoanContract
+            where enterprise = #{enterprise} and status= #{status};
+    </select>
+
+    <select id="queryLoanContractByBankAndEnterpriseAndStatus" resultType="LoanContract">
+            select * from LoanContract
+            where bank= #{bank} and enterprise = #{enterprise} and status= #{status};
+    </select>
+
+
+    <insert id="addLoanContract" parameterType="LoanContract" >
+        insert into LoanContract (enterprise, bank, loanPurpose, Money,waNo,reciptId,interests,repayMoney,status, startTime,dueTime)
+        values (#{enterprise},#{bank},#{loanPurpose},#{Money},#{waNo},#{reciptId},#{interests},#{repayMoney},#{status},#{startTime},#{dueTime})
+    </insert>
+
+    <update id="updateLoanContract" parameterType="LoanContract">
+            update LoanContract
+            set  enterprise=#{enterprise}, bank=#{bank},loanPurpose=#{loanPurpose},Money=#{Money}, waNo=#{waNo},reciptId=#{reciptId},interests=#{interests},repayMoney=#{repayMoney},startTime=#{startTime},dueTime=#{dueTime},status=#{status}
+            where id=#{id};
+     </update>
+</mapper>

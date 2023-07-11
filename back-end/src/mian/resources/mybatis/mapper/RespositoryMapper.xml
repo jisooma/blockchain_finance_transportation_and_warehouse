@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.RespositoryMapper">
+
+    <select id="queryAllRespository" resultType="Respository">
+            select * from respository;
+    </select>
+
+    <select id="queryRespositoryByHolder" resultType="Respository">
+            select * from respository
+            where holder= #{holder};
+    </select>
+
+    <select id="queryRespositoryByLogistics" resultType="Respository">
+            select * from respository
+            where logistics=#{logistics};
+    </select>
+
+    <select id="queryRespositoryByStatus" resultType="Respository">
+            select * from respository
+            where status= #{status};
+    </select>
+    <select id="queryRespositoryByLogisticsAndStatus" resultType="Respository">
+            select * from respository
+            where status= #{status} and logistics=#{logistics};
+    </select>
+
+    <select id="queryRespositoryByNameAndSpecification" resultType="Respository">
+            select * from respository
+            where name= #{name} and specification=#{specification};
+    </select>
+    <select id="queryRespositoryByHolderAndStatus" resultType="Respository">
+            select * from respository
+            where status= #{status} and holder= #{holder};
+    </select>
+
+    <select id="queryRespositoryByID" resultType="Respository">
+            select * from respository
+            where reNo= #{id};
+    </select>
+
+    <insert id="addRespository" parameterType="Respository" >
+        insert into respository (name, specification, number, addr, holder, logistics ,updateTime,status, remark)
+        values (#{name}, #{specification}, #{number},#{addr}, #{holder}, #{logistics},#{updateTime},#{status},#{remark})
+    </insert>
+
+    <update id="updateRespository" parameterType="Respository">
+            update respository
+            set name=#{name}, specification=#{specification}, number=#{number}, addr=#{addr}, holder=#{holder},logistics=#{logistics},updateTime=#{updateTime},status=#{status}, remark=#{remark}
+            where reNo=#{reNo};
+    </update>
+
+    <delete id="deleteRespository" parameterType="int">
+            delete from respository
+            where reNo=#{id}
+    </delete>
+</mapper>

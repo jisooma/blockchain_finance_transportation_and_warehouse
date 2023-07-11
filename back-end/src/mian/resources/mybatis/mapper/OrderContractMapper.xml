@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.OrderContractMapper">
+    <select id="queryOrderContractBySupplier" resultType="OrderContract">
+            select * from `ordercontract`
+            where supplier= #{supplier};
+    </select>
+    <select id="queryOrderContractBySupplierAndStatus" resultType="OrderContract">
+            select * from `ordercontract`
+            where supplier= #{supplier} and status=#{status};
+    </select>
+    <select id="queryOrderContractByBuyer" resultType="OrderContract">
+            select * from `ordercontract`
+             where buyer=#{buyer};
+    </select>
+    <select id="queryOrderContractByBuyerAndStatus" resultType="OrderContract">
+            select * from `ordercontract`
+            where buyer=#{buyer} and status=#{status};
+    </select>
+    <select id="queryAllOrderContract" resultType="OrderContract">
+            select * from `ordercontract`;
+    </select>
+    <select id="queryOrderContractById" resultType="OrderContract">
+            select * from `ordercontract`
+            where id=#{id};
+    </select>
+    <select id="queryOrderContractByUUId" resultType="OrderContract">
+            select * from `ordercontract`
+            where uuid=#{uuid};
+    </select>
+    <select id="queryOrderContractByStatus" resultType="OrderContract">
+            select * from ordercontract
+             where status=#{status};
+    </select>
+    <insert id="addOrderContract" parameterType="OrderContract" >
+        insert into ordercontract(supplier, buyer, uuid, demands, addr, time, expiration, startTime, endTime, status, remark)
+        values (#{supplier},#{buyer},#{uuid},#{demands},#{addr},#{time},#{expiration},#{startTime},#{endTime},#{status},#{remark})
+    </insert>
+    <update id="updateOrderContract" parameterType="OrderContract">
+        update ordercontract set supplier=#{supplier}, buyer=#{buyer}, uuid=#{uuid}, demands=#{demands}, addr=#{addr}, time=#{time}, expiration=#{expiration}, startTime=#{startTime}, endTime=#{endTime}, status=#{status}, remark=#{remark}   where id=#{id};
+    </update>
+    <delete id="deleteOrderContract" parameterType="int">
+            delete from ordercontract
+            where id=#{id}
+    </delete>
+</mapper>

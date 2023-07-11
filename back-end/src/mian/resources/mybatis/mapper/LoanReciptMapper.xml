@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.LoanReciptMapper">
+    <select id="queryAllLoanRecipt" resultType="LoanRecipt">
+            select * from loanrecipt;
+    </select>
+
+    <select id="queryLoanReciptByEnterpirse" resultType="LoanRecipt">
+            select * from loanrecipt
+            where enterprise = #{enterprise};
+    </select>
+
+    <select id="queryLoanReciptByEnterpirseAndStatus" resultType="LoanRecipt">
+            select * from loanrecipt
+            where enterprise = #{enterprise} and status=#{status};
+    </select>
+    <select id="queryLoanReciptByBank" resultType="LoanRecipt">
+            select * from loanrecipt
+            where bank= #{bank};
+    </select>
+
+    <select id="queryLoanReciptByBankAndStatus" resultType="LoanRecipt">
+            select * from loanrecipt
+            where bank= #{bank} and status=#{status};
+    </select>
+
+    <select id="queryLoanReciptByenterpriseAndBank" resultType="LoanRecipt">
+            select * from loanrecipt
+            where  enterprise = #{enterprise} and bank=#{bank};
+    </select>
+    <select id="queryLoanReciptByenterpriseAndBankAndTime" resultType="LoanRecipt">
+            select * from loanrecipt
+            where  enterprise =#{enterprise} and bank=#{bank} and updateTime=#{time};
+    </select>
+    <select id="queryLoanReciptByID" resultType="LoanRecipt">
+            select * from loanrecipt
+            where ID= #{id};
+    </select>
+
+    <select id="queryLoanReciptByStatus" resultType="LoanRecipt">
+            select * from loanrecipt
+            where  status=#{status};
+    </select>
+    <select id="queryLoanReciptByloanID" resultType="LoanRecipt">
+            select * from loanrecipt
+            where  loanID=#{loanID};
+    </select>
+
+
+
+    <insert id="addLoanRecipt" parameterType="LoanRecipt" >
+        insert into loanrecipt(enterprise, bank, loanID, allMoney, reMoney, status, updateTime, dueTime)
+        values (#{enterprise}, #{bank}, #{loanID},#{allMoney},#{reMoney},#{status},#{updateTime}, #{dueTime})
+    </insert>
+
+    <update id="updateLoanRecipt" parameterType="LoanRecipt">
+            update loanrecipt
+            set  enterprise=#{enterprise}, bank=#{bank},  loanID=#{loanID},
+                   allMoney=#{allMoney},  reMoney=#{reMoney},  status=#{status}, updateTime=#{updateTime},dueTime=#{dueTime}
+            where ID=#{ID};
+     </update>
+
+    <!--    <delete id="deleteRespository" parameterType="int">-->
+    <!--            delete from loanapply-->
+    <!--            where ID=#{id}-->
+    <!--    </delete>-->
+</mapper>

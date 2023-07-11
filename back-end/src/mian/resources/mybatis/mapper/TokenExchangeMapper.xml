@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.TokenExchangeMapper">
+    <select id="queryAllTTokenExchange" resultType="TokenExchange">
+            select * from tokenexchange;
+    </select>
+
+    <select id="queryTokenExchangeByBank" resultType="TokenExchange">
+            select * from tokenexchange
+            where bank = #{bank};
+    </select>
+
+    <select id="queryTokenExchangeByInitiator" resultType="TokenExchange">
+            select * from tokenexchange
+            where initiator = #{initiator};
+    </select>
+    <select id="queryTokenExchangeByBankAndStatus" resultType="TokenExchange">
+            select * from tokenexchange
+            where bank = #{bank} and status = #{status};
+    </select>
+
+    <select id="queryTokenExchangeByInitiatorAndStatus" resultType="TokenExchange">
+            select * from tokenexchange
+            where initiator = #{initiator} and status=#{status};
+    </select>
+
+    <select id="queryTokenExchangeByInitiatorAndBank" resultType="TokenExchange">
+            select * from tokenexchange
+            where initiator = #{initiator} and  bank = #{bank};
+    </select>
+
+    <select id="queryTokenExchangeByID" resultType="TokenExchange">
+            select * from tokenexchange
+            where id=#{id};
+    </select>
+
+    <insert id="addTokenExchange" parameterType="TokenExchange" >
+        insert into tokenexchange( bank, initiator, token, status, updateTime)
+        values (#{bank},#{initiator},#{token},#{status},#{updateTime})
+    </insert>
+
+    <update id="updateTokenExchange" parameterType="TokenExchange">
+            update tokenexchange
+            set bank=#{bank},initiator = #{initiator},token=#{token},status=#{status},updateTime=#{updateTime}
+            where id=#{id};
+        </update>
+
+    <delete id="deleteTokenExchange" parameterType="int">
+            delete from tokenexchange where id=#{id}
+        </delete>
+</mapper>

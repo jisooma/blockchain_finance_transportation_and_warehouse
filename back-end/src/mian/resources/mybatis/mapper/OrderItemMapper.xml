@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.OrderItemMapper">
+    <select id="queryOrderItemById" resultType="OrderItem">
+            select * from `orderitem`
+            where orID =#{orID};
+    </select>
+    <select id="queryOrderItemByUUID" resultType="OrderItem">
+            select * from `orderitem`
+            where uuid= #{uuid};
+    </select>
+    <select id="queryAllOrderItem" resultType="OrderItem">
+            select * from `orderitem`
+    </select>
+    <select id="queryOrderItemByStatus" resultType="OrderItem">
+            select * from `orderitem`
+            where status= #{status};
+    </select>
+    <select id="updateOrderItem" resultType="OrderItem">
+            select * from `orderitem`
+    </select>
+    <insert id="addOrderItem" parameterType="OrderItem" >
+        insert into `orderitem` (uuid, name, specification, number, status, updateTime)
+        values (#{uuid},#{name},#{specification}, #{number},#{status},#{updateTime})
+    </insert>
+    <delete id="deleteOrder" parameterType="int">
+            delete from "orderitem"
+            where orid=#{id}
+    </delete>
+</mapper>

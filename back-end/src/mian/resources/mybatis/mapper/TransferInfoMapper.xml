@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.TransferInfoMapper">
+    <select id="queryTransferInfoByPayee" resultType="TransferInfo">
+            select * from tranferinfo
+            where payee= #{payee};
+    </select>
+    <select id="queryTransferInfoByPayer" resultType="TransferInfo">
+            select * from tranferinfo
+            where payer= #{payer};
+    </select>
+    <select id="queryTransferInfoByPayerAndType" resultType="TransferInfo">
+            select * from tranferinfo
+            where payee= #{payee} and type=#{type};
+    </select>
+    <select id="queryTransferInfoByPayeeAndType" resultType="TransferInfo">
+            select * from tranferinfo
+            where payee= #{payee} and type=#{type};
+    </select>
+    <select id="queryAllTransferInfo" resultType="TransferInfo">
+            select * from tranferinfo;
+    </select>
+    <insert id="addTransferInfo" parameterType="TransferInfo" >
+        insert into tranferinfo (payer, payee, money,type,updateTime,remark)
+        values (#{payer},#{payee},#{money}, #{type},#{updateTime},#{remark})
+    </insert>
+    <delete id="deleteTransferInfo" parameterType="int">
+            delete from tranferinfo
+            where id=#{id}
+    </delete>
+</mapper>

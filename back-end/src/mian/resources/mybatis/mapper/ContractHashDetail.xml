@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.ContractHashDetailMapper">
+    <select id="queryContractHashDetailByNo" resultType="org.fisco.bcos.chaindata.ContractHashDetail">
+            select * from ContractHashDetail
+            where Number = #{no};
+    </select>
+
+    <insert id="addContractHashDetail" parameterType="org.fisco.bcos.chaindata.ContractHashDetail">
+        insert into contracthashdetail(blockNumber, thHash, fromAddr, toAddr, updateTime, Number)values (#{blockNumber},#{thHash},#{fromAddr},#{toAddr},#{time},#{number})
+    </insert>
+<!--    <insert id="addContractHashDetail" parameterType="org.fisco.bcos.chaindata.ContractHashDetail" >-->
+<!--        insert into ContractHashDetail(blockNumber, thHash, "from", "to", "time", "no")-->
+<!--        values (#{blockNumber},#{thHash},#{from},#{to},#{time},#{no})-->
+<!--    </insert>-->
+</mapper>

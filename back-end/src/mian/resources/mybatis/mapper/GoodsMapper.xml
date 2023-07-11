@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.GoodsMapper">
+
+    <select id="queryAllGoods" resultType="Goods">
+            select * from Goods;
+    </select>
+
+    <select id="queryGoodsByHolder" resultType="Goods">
+            select * from Goods
+            where holder= #{holder};
+    </select>
+    <select id="queryGoodsByStatus" resultType="Goods">
+            select * from Goods
+            where status= #{status};
+    </select>
+    <select id="queryGoodsByHolderAndStatus" resultType="Goods">
+            select * from Goods
+            where status= #{status} and holder= #{holder};
+    </select>
+
+    <select id="queryGoodsByID" resultType="Goods">
+            select * from Goods
+            where goNo= #{id};
+    </select>
+
+    <insert id="addGoods" parameterType="Goods" >
+        insert into Goods (name, specification, number, addr, holder,InputTime,status, remark)
+        values (#{name}, #{specification}, #{number},#{addr}, #{holder}, #{InputTime},#{status},#{remark})
+    </insert>
+
+    <update id="updateGoods" parameterType="Goods">
+            update Goods
+            set name=#{name}, specification=#{specification}, number=#{number}, addr=#{addr}, holder=#{holder},InputTime=#{InputTime},status=#{status}, remark=#{remark}
+            where goNo=#{goNo};
+    </update>
+
+    <delete id="deleteGoods" parameterType="int">
+            delete from Goods
+            where goNo=#{id}
+    </delete>
+</mapper>

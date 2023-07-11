@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.AccountMapper">
+    <select id="queryByType" resultType="Account">
+            select * from account
+             where  type =#{type};
+        </select>
+    <select id="queryByStatusAndType" resultType="Account">
+            select * from account
+            where status=#{status} and type = #{type};
+    </select>
+
+    <select id="queryAllAccount" resultType="Account">
+            select * from account;
+    </select>
+
+    <select id="login"  resultType="Account">
+            select * from account
+            where name=#{name} and password =#{password} and type = #{type};
+    </select>
+
+    <select id="findByName"  resultType="Account">
+            select * from account
+            where name=#{name};
+    </select>
+
+    <select id="findById"  resultType="Account">
+            select * from account
+            where id=#{id};
+    </select>
+
+
+    <insert id="addAccount" parameterType="Account" >
+        insert into account(type, name, password, bal, status, addr,privateKey)
+        values (#{type},#{name},#{password},#{bal},#{status},#{addr},#{privateKey})
+    </insert>
+
+    <update id="updateAccount" parameterType="Account">
+            update account set type=#{type},name=#{name},password=#{password},bal=#{bal},status=#{status},addr=#{addr},privateKey=#{privateKey}
+             where id=#{id};
+    </update>
+
+    <delete id="deleteAccount" parameterType="int">
+            delete from account where id=#{id}
+        </delete>
+</mapper>

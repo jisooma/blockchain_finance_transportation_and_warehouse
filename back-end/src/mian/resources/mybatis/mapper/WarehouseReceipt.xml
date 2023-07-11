@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fisco.bcos.mapper.WarehouseReceiptMapper">
+
+    <select id="queryAllWarehouseReceipt" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt;
+    </select>
+    <select id="queryWarehouseReceiptByHolder" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where holder= #{holder};
+    </select>
+    <select id="queryWarehouseReceiptByLogistics" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where logistics= #{logistics};
+    </select>
+    <select id="queryWarehouseReceiptByStatus" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where status= #{status};
+    </select>
+    <select id="queryWarehouseReceiptByLogisticsAndHolder" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where holder= #{holder} and logistics= #{logistics};
+    </select>
+    <select id="queryWarehouseReceiptByLogisticsAndHolderAndTime" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where holder= #{holder} and logistics= #{logistics} and updateTime=#{time};
+    </select>
+    <select id="queryWarehouseReceiptByLogisticsAndStatus" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where status= #{status} and logistics= #{logistics};
+    </select>
+    <select id="queryWarehouseReceiptByHolderAndStatus" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where holder= #{holder} and status= #{status};
+    </select>
+    <select id="queryWarehouseReceiptByID" resultType="WarehouseReceipt">
+            select * from WarehouseReceipt
+            where waNo= #{id};
+    </select>
+    <insert id="addWarehouseReceipt" parameterType="WarehouseReceipt" >
+        insert into WarehouseReceipt (holder, logistics, reno, valMoney, address, status, updateTime,remark)
+        values (#{holder}, #{logistics}, #{reno},#{valMoney},#{address},#{status}, #{updateTime},#{remark})
+    </insert>
+    <update id="updateWarehouseReceipt" parameterType="WarehouseReceipt">
+            update WarehouseReceipt
+            set  holder=#{holder},logistics= #{logistics}, reno= #{reno}, valMoney=#{valMoney}, address=#{address},status=#{status}, updateTime=#{updateTime},remark=#{remark}
+            where waNo = #{waNo};
+    </update>
+    <delete id="deleteWarehouseReceipt" parameterType="int">
+            delete from WarehouseReceipt
+            where waNo =#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,106 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+  id 'com.github.sherter.google-java-format' version '0.8'
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+description = 'Spring Boot Starter'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+googleJavaFormat {
+  options style: 'AOSP'
+  source = sourceSets*.allJava
+  include '**/*.java'
+  exclude '**/temp/*.java'
+  exclude '**/solidity/*.java'
+}
+
+verifyGoogleJavaFormat {
+  source = sourceSets*.allJava
+  include '**/*.java'
+  exclude '**/temp/*.java'
+  exclude '**/solidity/*.java'
+}
+
+check.dependsOn.remove(test)
+check.dependsOn.remove(verifyGoogleJavaFormat)
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url "https://dl.bintray.com/ethereum/maven/" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-logging'
+	compile 'org.codehaus.groovy:groovy-all:2.5.6'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.4'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation group: 'mysql', name: 'mysql-connector-java'
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
+
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.75'
+
+
+
+    // https://mvnrepository.com/artifact/cn.hutool/hutool-core
+    implementation group: 'cn.hutool', name: 'hutool-core', version: '5.5.9'
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on
+//    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.49'
+//    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+//    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.49'
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.11'
+    // https://mvnrepository.com/artifact/com.itextpdf/itext-asian
+    implementation group: 'com.itextpdf', name: 'itext-asian', version: '5.2.0'
+
+
+    // https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations
+    implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.1.7'
+    // https://mvnrepository.com/artifact/io.swagger/swagger-annotations
+    implementation group: 'io.swagger', name: 'swagger-annotations', version: '1.6.2'
+    // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+    // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.28'
+
+
+    compile 'org.fisco-bcos:web3sdk:2.3.0'
+}
+
+configurations {
+	all {
+		exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+test {
+    systemProperty "jdk.tls.namedGroups", "secp256k1"
+}
